@@ -45,4 +45,35 @@ class Department:
         self.employees = [emp for emp in self.employees if emp.emp_id != emp_id]
 
     def list_employees(self):
-        return [emp.get_details() for emp in self.employees]
+        return [emp.get_details() for emp in self.employees]# Main program to interact with the Employee Management System
+def main():
+    # Create Department
+    hr_department = Department("Human Resources")
+
+    # Add Full-Time Employee
+    emp1 = FullTimeEmployee("Alice", "F123", 60000, 25)
+    hr_department.add_employee(emp1)
+
+    # Add Part-Time Employee
+    emp2 = PartTimeEmployee("Bob", "P456", 20000, 150)
+    hr_department.add_employee(emp2)
+
+    # Display All Employees
+    print("Employees in HR Department:")
+    for emp_details in hr_department.list_employees():
+        print(emp_details)
+
+    # Show Bonus Calculation (Polymorphism in Action)
+    print("\nBonus Calculations:")
+    for emp in hr_department.employees:
+        print(f"{emp.name}'s Bonus: ${emp.calculate_bonus()}")
+
+    # Remove an Employee
+    hr_department.remove_employee("F123")
+    print("\nUpdated Employees in HR Department after removal:")
+    for emp_details in hr_department.list_employees():
+        print(emp_details)
+
+# Run the main function
+if __name__ == "__main__":
+    main()
